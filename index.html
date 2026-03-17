@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Mango Market</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+body{margin:0;font-family:Arial;background:#f2f2f2}
+
+header{
+background:orange;
+color:white;
+padding:15px;
+text-align:center;
+}
+
+.search{
+width:60%;
+padding:8px;
+border-radius:5px;
+border:none;
+}
+
+.slider img{
+width:100%;
+height:250px;
+object-fit:cover;
+}
+
+.products{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+}
+
+.card{
+background:white;
+width:220px;
+margin:15px;
+padding:15px;
+border-radius:10px;
+box-shadow:0 0 10px gray;
+text-align:center;
+}
+
+.card img{
+width:200px;
+height:150px;
+}
+
+button{
+background:green;
+color:white;
+border:none;
+padding:10px;
+width:100%;
+border-radius:5px;
+}
+
+.cart{
+position:fixed;
+right:0;
+top:70px;
+background:white;
+width:230px;
+height:300px;
+padding:10px;
+box-shadow:-2px 0 8px gray;
+overflow:auto;
+}
+
+footer{
+background:#333;
+color:white;
+text-align:center;
+padding:20px;
+margin-top:20px;
+}
+</style>
+
+</head>
+
+<body>
+
+<header>
+<h2>🥭 Mango Market</h2>
+<input class="search" placeholder="Search mango..." onkeyup="searchItem()">
+</header>
+
+<div class="slider">
+<img id="slide" src="https://upload.wikimedia.org/wikipedia/commons/e/e2/Mangoes_at_a_market.jpg">
+</div>
+
+<div class="products">
+
+<div class="card">
+<img src="https://upload.wikimedia.org/wikipedia/commons/9/90/Hapus_Mango.jpg">
+<h3>Alphonso</h3>
+<p>₹1200</p>
+<button onclick="addCart('Alphonso',1200)">Add</button>
+</div>
+
+<div class="card">
+<img src="https://upload.wikimedia.org/wikipedia/commons/5/59/Kesar_Mango.jpg">
+<h3>Kesar</h3>
+<p>₹950</p>
+<button onclick="addCart('Kesar',950)">Add</button>
+</div>
+
+<div class="card">
+<img src="https://upload.wikimedia.org/wikipedia/commons/3/3f/Totapuri_mango.jpg">
+<h3>Totapuri</h3>
+<p>₹600</p>
+<button onclick="addCart('Totapuri',600)">Add</button>
+</div>
+
+<div class="card">
+<img src="https://upload.wikimedia.org/wikipedia/commons/2/2c/Banganapalli_Mango.jpg">
+<h3>Banganapalli</h3>
+<p>₹800</p>
+<button onclick="addCart('Banganapalli',800)">Add</button>
+</div>
+
+</div>
+
+<div class="cart">
+<h3>🛒 Cart</h3>
+<ul id="cart"></ul>
+<h4>Total ₹ <span id="total">0</span></h4>
+</div>
+
+<footer>
+<p>Mango Market Bangalore</p>
+<p>Email: mangomarket@gmail.com</p>
+</footer>
+
+<script>
+
+var imgs=[
+"https://upload.wikimedia.org/wikipedia/commons/e/e2/Mangoes_at_a_market.jpg",
+"https://images.unsplash.com/photo-1605027990121-cbae9c9962d9",
+"https://images.unsplash.com/photo-1550258987-190a2d41a8ba"
+];
+
+var i=0;
+setInterval(function(){
+i++;
+if(i>=imgs.length)i=0;
+document.getElementById("slide").src=imgs[i];
+},3000);
+
+var total=0;
+
+function addCart(name,price){
+var li=document.createElement("li");
+li.innerHTML=name+" ₹"+price;
+document.getElementById("cart").appendChild(li);
+
+total+=price;
+document.getElementById("total").innerHTML=total;
+}
+
+function searchItem(){
+var input=document.querySelector(".search").value.toLowerCase();
+var cards=document.querySelectorAll(".card");
+
+cards.forEach(function(c){
+if(c.innerText.toLowerCase().includes(input))
+c.style.display="block";
+else
+c.style.display="none";
+});
+}
+
+</script>
+
+</body>
+</html>
